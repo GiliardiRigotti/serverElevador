@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String        @id @default(uuid())
+  username       String
+  name           String
+  password       String
+  expoToken      String
+  level          Int
+  created_at     DateTime
+  refresh_token  RefreshToken? @relation(fields: [refreshTokenId], references: [id])
+  refreshTokenId String?
+
+  @@unique([username])
+  @@map("user")
+}
+
+model Notification {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  created_at  DateTime
+
+  @@map("notification")
+}
+
+model Recommendation {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  created_at  DateTime
+
+  @@map("recommendation")
+}
+
+model RefreshToken {
+  id       String @id @default(uuid())
+  expireIn Int
+  userId   String
+  User     User[]
+
+  @@map("refreshToken")
+}
