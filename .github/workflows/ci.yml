@@ -9,10 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-        - run: npm ci
-        - run: npm run build
+        uses: actions/checkout@v2
+        uses: actions/setup-node@v1
+        run: npm ci
+        run: npm run build
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
