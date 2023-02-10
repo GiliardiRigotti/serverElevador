@@ -12,10 +12,11 @@ jobs:
       - name: Teste
         uses: actions/checkout@v2
       - name: Teste
-        uses: actions/setup-node@v1
-          - with:
-              node-version: 18
-
+      - uses: actions/setup-node@v3
+          with:
+            node-version: 16
+            cache: 'npm'
+            cache-dependency-path: subdir/package-lock.json
       - name: Teste
         run: npm i yarn
       - name: Teste
