@@ -14,7 +14,7 @@ jobs:
       - name: Teste
         uses: actions/setup-node@v1
       - name: Teste
-        run: npm ci
+        run: npm install
       - name: Teste
         run: npm run build
       - name: Teste
