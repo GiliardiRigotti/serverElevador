@@ -8,21 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14, 16, 18]
+    name: Node ${{ matrix.node }} sample
     steps:
-      - name: Teste
-        uses: actions/checkout@v2
-      - name: Teste
-      - uses: actions/setup-node@v3
-        - with:
-            node-version: 16
-            cache: 'npm'
-            cache-dependency-path: subdir/package-lock.json
-      - name: Teste
-        run: npm i yarn
-      - name: Teste
-        run: yarn
-      - name: Teste
-        run: yarn build
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm build
       - name: Teste
         uses: easingthemes/ssh-deploy@main
         env:
