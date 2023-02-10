@@ -21,9 +21,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      - run: npm i yarn
-      - run: yarn install
-      - run: yarn build
       - name: Teste
         uses: easingthemes/ssh-deploy@main
         env:
@@ -34,3 +31,6 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
+      - run: npm i yarn
+      - run: yarn install
+      - run: yarn build
