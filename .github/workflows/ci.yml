@@ -9,17 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Install Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: "18.x"
-      - name: Install npm dependencies
-        run: npm install
-      - name: Run build task
-        run: npm run build
+      - name: Checkout do repositorio
+        uses: actions/checkout@v1
       - name: Deploy para meu hosting
-        uses: easingthemes/ssh-deploy@master
+        uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
           ARGS: "-rlgoDzvc -i --delete"
