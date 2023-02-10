@@ -14,9 +14,11 @@ jobs:
       - name: Teste
         uses: actions/setup-node@v1
       - name: Teste
-        run: npm install
+        run: npm i yarn
       - name: Teste
-        run: npm run build
+        run: yarn
+      - name: Teste
+        run: yarn build
       - name: Teste
         uses: easingthemes/ssh-deploy@main
         env:
