@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm i yarn
       - run: yarn install
-      - run: yarn dev
+      - run: yarn build
       - name: Teste
         uses: easingthemes/ssh-deploy@main
         env:
