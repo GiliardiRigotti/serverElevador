@@ -1,4 +1,4 @@
-name: GiliardiRigotti
+name: Hostinger API
 
 on:
   push:
@@ -9,28 +9,24 @@ on:
       - master
 
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        node: [18]
-    name: Node ${{ matrix.node }} sample
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-      - name: Teste
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "src/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-      - run: npm i yarn
-      - run: yarn install
-      - run: yarn build
+        node-version: [18.x]
+   
+   steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+      
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+
+    
